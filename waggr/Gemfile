@@ -47,3 +47,5 @@ gem "jwt", "~> 2.2"
 gem "faker"
 
 gem "figaro"
+
+gem 'fast_jsonapi'

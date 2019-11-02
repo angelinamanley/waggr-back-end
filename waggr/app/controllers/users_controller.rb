@@ -1,12 +1,13 @@
 class UsersController < ApplicationController
 
     def index
-        render json: User.all
+        users = User.all
+        render json: users
     end
 
     def show
         user = User.find(params[:id])
-        render json :user 
+        render json: user 
     end
 
     def create 

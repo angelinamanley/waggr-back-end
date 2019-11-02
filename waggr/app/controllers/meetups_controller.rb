@@ -1,6 +1,9 @@
 class MeetupsController < ApplicationController
+   
+    
     def index
-        render json: Meetup.all
+        meetups = Meetup.all
+        render json: meetups
     end
 
     def show
@@ -30,7 +33,7 @@ class MeetupsController < ApplicationController
     private 
     
     def meetup_params 
-        params.require(:meetup).permit(:group_id, :description, :location, :time, :date )
+        params.require(:meetup).permit(:group_id, :description, :location, :datetime, :name )
     end
     
 end

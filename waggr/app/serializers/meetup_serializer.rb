@@ -1,3 +1,5 @@
 class MeetupSerializer < ActiveModel::Serializer
-  attributes :id, :date, :time, :location, :description, :attendences
+  attributes :name, :id, :datetime, :location, :description
+  has_many :attendances
+
 end
