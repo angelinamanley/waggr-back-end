@@ -5,7 +5,7 @@ class GroupsController < ApplicationController
 
     def show
         group = Group.find(params[:id])
-        render json :group 
+        render json: group 
     end
 
     def create 

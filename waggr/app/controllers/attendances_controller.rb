@@ -5,7 +5,7 @@ class AttendancesController < ApplicationController
 
     def show
         attendance = Attendance.find(params[:id])
-        render json :attendance 
+        render json: attendance 
     end
 
     def create 
