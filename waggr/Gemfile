@@ -49,3 +49,5 @@ gem "faker"
 gem "figaro"
 
 gem 'fast_jsonapi'
+
+gem 'geocoder'

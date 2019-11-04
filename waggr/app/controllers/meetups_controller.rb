@@ -13,6 +13,7 @@ class MeetupsController < ApplicationController
 
     def create 
         meetup = Meetup.create(meetup_params)
+        attendance = Attendance.create(meetup_id: meetup.id, user_id: @current_user.id)
         render json: meetup
     end
 

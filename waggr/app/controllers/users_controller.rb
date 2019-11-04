@@ -1,3 +1,6 @@
+require_relative "../test"
+
+
 class UsersController < ApplicationController
 
     def index
@@ -32,11 +35,26 @@ class UsersController < ApplicationController
         render json: user
     end
 
+    def add_location 
+        user=User.find(params[:user_id])
+        user.update(location: params[:location])
+        user.save
+        coordinates = user.geocode
+        user.latitude = coordinates[0]
+        user.longitude = coordinates[1]
+        user.save
+        render json: user 
+
+
+
+
+    end
+
 
     private 
     
     def user_params 
-        params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :photo )
+        params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :photo, :location )
     end
 
 

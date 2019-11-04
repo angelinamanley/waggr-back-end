@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+    geocoded_by :location
+    after_validation :geocode
+    
     has_many :dogs 
     has_many :memberships
     has_many :posts
@@ -7,9 +10,8 @@ class User < ApplicationRecord
     has_many :groups, through: :memberships
     has_many :meetups, through: :attendances
     has_secure_password
-    validates :first_name, presence: true
-    validates :last_name, presence: true
-    validates :email, presence: true
+
+  
 
 
 
