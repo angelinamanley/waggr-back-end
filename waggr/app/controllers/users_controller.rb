@@ -38,7 +38,6 @@ class UsersController < ApplicationController
     def add_location 
         user=User.find(params[:user_id])
         user.update(location: params[:location])
-        user.save
         coordinates = user.geocode
         user.latitude = coordinates[0]
         user.longitude = coordinates[1]

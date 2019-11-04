@@ -13,6 +13,10 @@ class MeetupsController < ApplicationController
 
     def create 
         meetup = Meetup.create(meetup_params)
+        coordinates = meetup.geocode 
+        meetup.latitude = coordinates[0]
+        meetup.longitude = coordinates[1]
+        meetup.save
         attendance = Attendance.create(meetup_id: meetup.id, user_id: @current_user.id)
         render json: meetup
     end
