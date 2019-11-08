@@ -2,10 +2,10 @@ class User < ApplicationRecord
     geocoded_by :location
     after_validation :geocode
     
-    has_many :dogs 
-    has_many :memberships
-    has_many :posts
-    has_many :attendances 
+    has_many :dogs, dependent: :destroy
+    has_many :memberships, dependent: :destroy
+    has_many :posts, dependent: :destroy
+    has_many :attendances, dependent: :destroy
 
     has_many :groups, through: :memberships
     has_many :meetups, through: :attendances
