@@ -13,11 +13,12 @@ class MeetupsController < ApplicationController
 
     def create 
         meetup = Meetup.create(meetup_params)
-        coordinates = meetup.geocode 
-        meetup.latitude = coordinates[0]
-        meetup.longitude = coordinates[1]
-        meetup.save
+        # coordinates = meetup.geocode 
+        # meetup.latitude = coordinates[0]
+        # meetup.longitude = coordinates[1]
+        # meetup.save
         attendance = Attendance.create(meetup_id: meetup.id, user_id: @current_user.id)
+        byebug
         render json: meetup
     end
 
@@ -25,6 +26,7 @@ class MeetupsController < ApplicationController
     def update 
         meetup = Meetup.find(params[:id])
         meetup.update(meetup_params)
+        meetup.save
         render json: meetup
     end
 
@@ -38,7 +40,7 @@ class MeetupsController < ApplicationController
     private 
     
     def meetup_params 
-        params.require(:meetup).permit(:group_id, :description, :location, :datetime, :name )
+        params.require(:meetup).permit(:group_id, :description, :location, :datetime, :name, :admin_id, :latitude, :longitude )
     end
     
 end

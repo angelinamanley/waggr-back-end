@@ -26,6 +26,7 @@ class UsersController < ApplicationController
     def update 
         user = User.find(params[:id])
         user.update(user_params)
+        user.save
         render json: user
     end
 
@@ -35,19 +36,15 @@ class UsersController < ApplicationController
         render json: user
     end
 
-    def add_location 
-        user=User.find(params[:user_id])
-        user.update(location: params[:location])
-        coordinates = user.geocode
-        user.latitude = coordinates[0]
-        user.longitude = coordinates[1]
-        user.save
-        render json: user 
-
-
-
-
-    end
+    # def add_location 
+    #     user=User.find(params[:user_id])
+    #     user.update(location: params[:location])
+    #     coordinates = user.geocode
+    #     user.latitude = coordinates[0]
+    #     user.longitude = coordinates[1]
+    #     user.save
+    #     render json: user     
+# end
 
 
     private 
