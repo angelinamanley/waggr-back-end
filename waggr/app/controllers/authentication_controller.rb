@@ -5,7 +5,7 @@ class AuthenticationController < ApplicationController
         if user && user.authenticate(login_params[:password])
             render json: { token: encode_token({user_id: user.id}), user: UserSerializer.new(user) }
         else
-            render json: { errors: ["credentials not valid"] }, status: :not_acceptable
+            render json: { error: "credentials not valid" }, status: :not_acceptable
         end
     end
 
@@ -13,7 +13,7 @@ class AuthenticationController < ApplicationController
         if @current_user
             render json: { token: encode_token({user_id: @current_user.id}), user: UserSerializer.new(@current_user)}
         else
-            render json: { errors: ["user not found"] }, status: :not_found
+            render json: { error: "user not found" }, status: :not_found
         end
     end
 
