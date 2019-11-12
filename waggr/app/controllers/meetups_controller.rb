@@ -18,7 +18,7 @@ class MeetupsController < ApplicationController
         # meetup.longitude = coordinates[1]
         # meetup.save
         attendance = Attendance.create(meetup_id: meetup.id, user_id: @current_user.id)
-        byebug
+       
         render json: meetup
     end
 
