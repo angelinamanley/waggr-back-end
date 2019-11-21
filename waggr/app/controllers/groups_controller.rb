@@ -10,6 +10,7 @@ class GroupsController < ApplicationController
 
     def create 
         group = Group.create(group_params)
+        membership = Membership.create(group_id: group.id, user_id: @current_user.id)
         render json: group
     end
 
