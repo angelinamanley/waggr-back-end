@@ -5,7 +5,7 @@ class GroupsController < ApplicationController
 
     def show
         group = Group.find(params[:id])
-        render json :group 
+        render json: group 
     end
 
     def create 
@@ -30,6 +30,6 @@ class GroupsController < ApplicationController
     private 
     
     def group_params 
-        params.require(:group).permit(:name, :description, :admin_id)
+        params.require(:group).permit(:name, :description, :admin_id, :photo)
     end
 end

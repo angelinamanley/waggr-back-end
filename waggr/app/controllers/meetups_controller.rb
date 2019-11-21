@@ -1,15 +1,23 @@
 class MeetupsController < ApplicationController
+   
+    
     def index
-        render json: Meetup.all
+        meetups = Meetup.all
+        render json: meetups
     end
 
     def show
         meetup = Meetup.find(params[:id])
-        render json :meetup 
+        render json: meetup 
     end
 
     def create 
         meetup = Meetup.create(meetup_params)
+        coordinates = meetup.geocode 
+        meetup.latitude = coordinates[0]
+        meetup.longitude = coordinates[1]
+        meetup.save
+        attendance = Attendance.create(meetup_id: meetup.id, user_id: @current_user.id)
         render json: meetup
     end
 
@@ -30,7 +38,7 @@ class MeetupsController < ApplicationController
     private 
     
     def meetup_params 
-        params.require(:meetup).permit(:group_id, :description, :location, :time, :date )
+        params.require(:meetup).permit(:group_id, :description, :location, :datetime, :name )
     end
     
 end

@@ -1,12 +1,16 @@
+require_relative "../test"
+
+
 class UsersController < ApplicationController
 
     def index
-        render json: User.all
+        users = User.all
+        render json: users
     end
 
     def show
         user = User.find(params[:id])
-        render json :user 
+        render json: user 
     end
 
     def create 
@@ -31,11 +35,25 @@ class UsersController < ApplicationController
         render json: user
     end
 
+    def add_location 
+        user=User.find(params[:user_id])
+        user.update(location: params[:location])
+        coordinates = user.geocode
+        user.latitude = coordinates[0]
+        user.longitude = coordinates[1]
+        user.save
+        render json: user 
+
+
+
+
+    end
+
 
     private 
     
     def user_params 
-        params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :photo )
+        params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :photo, :location )
     end
 
 

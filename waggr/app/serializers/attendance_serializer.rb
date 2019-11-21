@@ -1,5 +1,14 @@
 class AttendanceSerializer < ActiveModel::Serializer
-  attributes :id
-  has_one :user
-  has_one :meetup
+  attributes :id, :meetup_name, :user, :meetup
+  belongs_to :user
+  belongs_to :meetup
+
+  def meetup_name
+    self.object.meetup.name
+  end
+
+
 end
+
+
+
